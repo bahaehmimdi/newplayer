@@ -34,4 +34,52 @@
             </div>
         {% endfor %}
         
-        <button type="button" onclick="addField()">Add Field</
+        <button type="button" onclick="addField()">Add Field</button>
+        <hr>
+
+        <input type="submit" value="Save">
+    </form>
+
+    <script>
+        function addField() {
+            var fieldIndex = document.querySelectorAll('.field-group').length + 1;
+
+            var newFieldGroup = document.createElement('div');
+            newFieldGroup.classList.add('field-group');
+            newFieldGroup.setAttribute('data-index', fieldIndex);
+
+            newFieldGroup.innerHTML = `
+                <label>Label:</label>
+                <input type="text" name="label_${fieldIndex}" value=""><br>
+
+                <label>Type:</label>
+                <select name="type_${fieldIndex}">
+                    <option value="text">Text</option>
+                    <option value="dropdown">Dropdown</option>
+                    <option value="radio">Radio</option>
+                    <option value="calendar">Calendar</option>
+                    <option value="number">Number</option>
+                </select><br>
+
+                <label>Options (comma-separated):</label>
+                <input type="text" name="options_${fieldIndex}" value=""><br>
+
+                <label>Initial Value:</label>
+                <input type="text" name="value_${fieldIndex}" value=""><br>
+
+                <button type="button" class="remove-field" onclick="removeField(${fieldIndex})">Remove</button>
+                <hr>
+            `;
+
+            document.querySelector('form').insertBefore(newFieldGroup, document.querySelector('button[type="button"]'));
+        }
+
+        function removeField(index) {
+            var fieldGroup = document.querySelector('.field-group[data-index="' + index + '"]');
+            if (fieldGroup) {
+                fieldGroup.remove();
+            }
+        }
+    </script>
+</body>
+</html>
