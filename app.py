@@ -27,7 +27,9 @@ def edit_data():
                     updated_data["fields"][index]["options"] = value.split(',')
                 elif field_type == 'value':
                     updated_data["fields"][index]["value"] = value
-
+                else:
+                    updated_data["fields"].pop()
+            "fields"
             # Update the data in the file
             write_data(updated_data)
 
