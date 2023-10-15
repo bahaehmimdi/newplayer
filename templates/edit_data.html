@@ -42,37 +42,40 @@
 
     <script>
         function addField() {
-            var fieldIndex = document.querySelectorAll('.field-group').length + 1;
+    var fieldIndex = document.querySelectorAll('.field-group').length + 1;
 
-            var newFieldGroup = document.createElement('div');
-            newFieldGroup.classList.add('field-group');
-            newFieldGroup.setAttribute('data-index', fieldIndex);
+    var newFieldGroup = document.createElement('div');
+    newFieldGroup.classList.add('field-group');
+    newFieldGroup.setAttribute('data-index', fieldIndex);
 
-            newFieldGroup.innerHTML = `
-                <label>Label:</label>
-                <input type="text" name="label_${fieldIndex}" value=""><br>
+    newFieldGroup.innerHTML = `
+        <label>Label:</label>
+        <input type="text" name="label_${fieldIndex}" value=""><br>
 
-                <label>Type:</label>
-                <select name="type_${fieldIndex}">
-                    <option value="text">Text</option>
-                    <option value="dropdown">Dropdown</option>
-                    <option value="radio">Radio</option>
-                    <option value="calendar">Calendar</option>
-                    <option value="number">Number</option>
-                </select><br>
+        <label>Type:</label>
+        <select name="type_${fieldIndex}">
+            <option value="text">Text</option>
+            <option value="dropdown">Dropdown</option>
+            <option value="radio">Radio</option>
+            <option value="calendar">Calendar</option>
+            <option value="number">Number</option>
+        </select><br>
 
-                <label>Options (comma-separated):</label>
-                <input type="text" name="options_${fieldIndex}" value=""><br>
+        <label>Options (comma-separated):</label>
+        <input type="text" name="options_${fieldIndex}" value=""><br>
 
-                <label>Initial Value:</label>
-                <input type="text" name="value_${fieldIndex}" value=""><br>
+        <label>Initial Value:</label>
+        <input type="text" name="value_${fieldIndex}" value=""><br>
 
-                <button type="button" class="remove-field" onclick="removeField(${fieldIndex})">Remove</button>
-                <hr>
-            `;
+        <button type="button" class="remove-field" onclick="removeField(${fieldIndex})">Remove</button>
+        <hr>
+    `;
 
-            document.querySelector('form').insertBefore(newFieldGroup, document.querySelector('button[type="button"]'));
-        }
+    var form = document.querySelector('form');
+    var lastChild = form.lastElementChild;
+
+    form.insertBefore(newFieldGroup, lastChild);
+}
 
         function removeField(index) {
             var fieldGroup = document.querySelector('.field-group[data-index="' + index + '"]');
