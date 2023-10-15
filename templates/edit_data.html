@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data</title>
+</head>
+<body>
+    <h1>Edit Data</h1>
+    <form method="POST" action="/edit_data">
+
+        {% for field in current_data.fields %}
+            <div class="field-group" data-index="{{ loop.index }}">
+                <label>Label:</label>
+                <input type="text" name="label_{{ loop.index }}" value="{{ field.label }}"><br>
+
+                <label>Type:</label>
+                <select name="type_{{ loop.index }}">
+                    <option value="text" {% if field.type == 'text' %}selected{% endif %}>Text</option>
+                    <option value="dropdown" {% if field.type == 'dropdown' %}selected{% endif %}>Dropdown</option>
+                    <option value="radio" {% if field.type == 'radio' %}selected{% endif %}>Radio</option>
+                    <option value="calendar" {% if field.type == 'calendar' %}selected{% endif %}>Calendar</option>
+                    <option value="number" {% if field.type == 'number' %}selected{% endif %}>Number</option>
+                </select><br>
+
+                <label>Options (comma-separated):</label>
+                <input type="text" name="options_{{ loop.index }}" value="{% if field.options %}{{ field.options|join(',') }}{% endif %}"><br>
+
+                <label>Initial Value:</label>
+                <input type="text" name="value_{{ loop.index }}" value="{{ field.value }}"><br>
+
+                <button type="button" class="remove-field" onclick="removeField({{ loop.index }})">Remove</button>
+                <hr>
+            </div>
+        {% endfor %}
+        
+        <button type="button" onclick="addField()">Add Field</
