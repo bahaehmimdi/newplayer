@@ -1,0 +1,9 @@
+{
+    "fields": [
+        {"label": "Field 1", "type": "text", "value": "Value 1"},
+        {"label": "Field 2", "type": "dropdown", "options": ["Option 1", "Option 2"], "value": "Option 1"},
+        {"label": "Field 3", "type": "radio", "options": ["Option A", "Option B"], "value": "Option A"},
+        {"label": "Field 4", "type": "calendar", "value": "2023-01-01"},
+        {"label": "Field 5", "type": "number", "value": 42}
+    ]
+}
