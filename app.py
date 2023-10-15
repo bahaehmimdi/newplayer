@@ -4,6 +4,7 @@ import json
 app = Flask(__name__)
 @app.route('/edit_data', methods=['GET', 'POST'])
 def edit_data():
+ try:    
     if request.method == 'POST':
         try:
             # Read the updated data from the HTML form
@@ -37,6 +38,8 @@ def edit_data():
         # Read the current data to display in the HTML form
         current_data = read_data()
         return render_template('edit_data.html', current_data=current_data)
+ except Exception as me:
+     return str(me)
 # File path to store JSON data
 data_file_path = 'data.json'
 
