@@ -56,7 +56,12 @@ def read_data():
         return {"fields": []}
 
 def write_data(data):
-  if  len(data)>0:  
+  if type({}) =type(data):
+   if "fields" in data.keys() :
+    for el in  data["fields"].copy():   
+     if el!={} or el.get("value")!="":   
+      data["fields"].remove(el)
+        
     with open(data_file_path, 'w') as file:
         json.dump(data, file, indent=2)
 
