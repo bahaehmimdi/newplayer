@@ -16,8 +16,8 @@ def edit_data():
                 field_type = field_info[0]
 
                 # Ensure the index is within bounds
-                while index >= len(updated_data["fields"]):
-                    updated_data["fields"].append({})
+              #  while index >= len(updated_data["fields"]):
+               #     updated_data["fields"].append({})
 
                 if field_type == 'label':
                     updated_data["fields"][index]["label"] = value
