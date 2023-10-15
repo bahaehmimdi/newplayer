@@ -41,7 +41,7 @@
     </form>
 
     <script>
-        function addField() {
+     function addField() {
     var fieldIndex = document.querySelectorAll('.field-group').length + 1;
 
     var newFieldGroup = document.createElement('div');
@@ -72,10 +72,9 @@
     `;
 
     var form = document.querySelector('form');
-    var lastChild = form.lastElementChild;
-
-    form.insertBefore(newFieldGroup, lastChild);
+    form.insertBefore(newFieldGroup, form.lastElementChild);
 }
+
 
         function removeField(index) {
             var fieldGroup = document.querySelector('.field-group[data-index="' + index + '"]');
