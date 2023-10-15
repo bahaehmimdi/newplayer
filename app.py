@@ -54,7 +54,7 @@ def read_data():
         return {"fields": []}
 
 def write_data(data):
-  if not len(data)>0:  
+  if  len(data)>0:  
     with open(data_file_path, 'w') as file:
         json.dump(data, file, indent=2)
 
