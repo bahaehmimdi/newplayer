@@ -76,8 +76,7 @@ def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
     with io.open(outfile_path, 'wt', encoding='utf8') as outfile:
         csv = df.to_csv(encoding='utf8')
 
-    return TEMPLATE %
-            dict(csv=csv, kwargs=json.dumps(kwargs))
+    return TEMPLATE % dict(csv=csv, kwargs=json.dumps(kwargs))
 def show_user(url):
  #return  request.args.get('url', 'No URL provided')
  datas=[]
