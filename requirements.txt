@@ -1,2 +1,6 @@
 Flask
 Gunicorn
+requests
+beautifulsoup4
+pandas
+lxml 
