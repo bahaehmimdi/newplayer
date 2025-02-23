@@ -1,7 +1,63 @@
 from flask import Flask, request, jsonify,render_template
 import json
-
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 app = Flask(__name__)
+@app.route('/dash/<username>')
+def show_user(username):
+ return request.path.split("/dash/")[-1] 
+ datas=[]
+ # URL of the webpage to scrape
+ p=1
+ stop= False
+ while not stop:
+  url = request.path.split("/dash/")[-1]+#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"+":p:"+str(p)
+
+# Send a GET request to fetch the page content
+  response = requests.get(url)
+
+# Check if the request was successful
+  if response.status_code == 200:
+    # Parse the page content with BeautifulSoup
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    # Find all divs with a specific class (replace 'your-class' with the actual class name)
+    target_divs = soup.find_all("div", class_="listingBox")
+    if len(target_divs)==0:
+        stop=True
+    else:
+        p=p+1
+    print(len(target_divs))
+   
+    # Iterate over each div and process its content
+    for div in target_divs[:-1]:
+       # print(len(div.find_all("a", class_="contactBtn")))
+       
+         
+        datas.append({
+"price":div.find_all(lambda tag: tag.has_attr('class') and any("priceBar" in cls for cls in tag['class']))[0].text,            
+"title":div.find_all(lambda tag: tag.has_attr('class') and any("listingTit" in cls for cls in tag['class']))[0].text,
+
+"location":div.find_all(lambda tag: tag.has_attr('class') and any("contactBar" in cls for cls in tag['class']))[0].text,
+"options":list(map(lambda a:a.text.replace("\n","").replace("\t"," "),list(div.find_all("div", class_="adDetailFeature")))),
+"extras":list(map(lambda a:a.text.replace("\n","").replace("\t"," "),list(div.find_all("div", class_="adFeature"))))
+            })  # Print the text inside the div
+    
+        # You can add more processing logic here
+        print(len(datas))
+  else:
+    print(f"Failed to retrieve the page. Status code: {response.status_code}")
+
+# Convert to DataFrame
+ df = pd.DataFrame(datas)
+
+# Export to Excel
+ df.to_excel("output3.xlsx", index=False)
+
+ print("Excel file saved successfully!")
+
+
 @app.route('/edit_data', methods=['GET', 'POST'])
 def edit_data():
     if request.method == 'POST':
