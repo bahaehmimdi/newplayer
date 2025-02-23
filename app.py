@@ -6,13 +6,13 @@ import pandas as pd
 app = Flask(__name__)
 @app.route('/dash')
 def show_user():
- return  request.args.get('url', 'No URL provided')
+ #return  request.args.get('url', 'No URL provided')
  datas=[]
  # URL of the webpage to scrape
  p=1
  stop= False
  while not stop:
-  url = request.path.split("/dash/")[-1]#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"+":p:"+str(p)
+  url = request.args.get('url', 'No URL provided')#request.path.split("/dash/")[-1]#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"+":p:"+str(p)
 
 # Send a GET request to fetch the page content
   response = requests.get(url)
@@ -51,11 +51,11 @@ def show_user():
 
 # Convert to DataFrame
  df = pd.DataFrame(datas)
-
+ return df.to_html(index=False)
 # Export to Excel
- df.to_excel("output3.xlsx", index=False)
+# df.to_excel("output3.xlsx", index=False)
 
- print("Excel file saved successfully!")
+#print("Excel file saved successfully!")
 
 
 @app.route('/edit_data', methods=['GET', 'POST'])
