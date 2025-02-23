@@ -4,9 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 app = Flask(__name__)
-@app.route('/dash/<username>')
-def show_user(username):
- return request.path.split("/dash/")[-1] 
+@app.route('/dash')
+def show_user():
+ return  request.args.get('url', 'No URL provided')
  datas=[]
  # URL of the webpage to scrape
  p=1
