@@ -12,7 +12,7 @@ def show_user(username):
  p=1
  stop= False
  while not stop:
-  url = request.path.split("/dash/")[-1]+#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"+":p:"+str(p)
+  url = request.path.split("/dash/")[-1]#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"+":p:"+str(p)
 
 # Send a GET request to fetch the page content
   response = requests.get(url)
