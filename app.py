@@ -124,10 +124,10 @@ def show_user(url):
  df = pd.DataFrame(datas)
  return df
 @app.route('/table')
-def tester():
+def testert():
  return show_user(url).to_html(index=False)
 @app.route('/dash')
-def tester():
+def testerd():
  return pivot_ui(show_user(url))
 # Export to Excel
 # df.to_excel("output3.xlsx", index=False)
