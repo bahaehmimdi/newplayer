@@ -107,10 +107,10 @@ def show_user(url):
        
          
         datas.append({
-"price":div.find_all(lambda tag: tag.has_attr('class') and any("priceBar" in cls for cls in tag['class']))[0].text,            
-"title":div.find_all(lambda tag: tag.has_attr('class') and any("listingTit" in cls for cls in tag['class']))[0].text,
+"price":div.find_all(lambda tag: tag.has_attr('class') and any("priceBar" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),            
+"title":div.find_all(lambda tag: tag.has_attr('class') and any("listingTit" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),
 
-"location":div.find_all(lambda tag: tag.has_attr('class') and any("contactBar" in cls for cls in tag['class']))[0].text,
+"location":div.find_all(lambda tag: tag.has_attr('class') and any("contactBar" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),
 "options":list(map(lambda a:a.text.replace("\n","").replace("\t"," "),list(div.find_all("div", class_="adDetailFeature")))),
 "extras":list(map(lambda a:a.text.replace("\n","").replace("\t"," "),list(div.find_all("div", class_="adFeature"))))
             })  # Print the text inside the div
