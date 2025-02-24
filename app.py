@@ -73,7 +73,7 @@ def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
                 ).show();
              });
         </script>
-        <div id="output" style="display: none;">{"""+str(csv)+"""s</div>
+        <div id="output" style="display: none;">"""+str(csv)+"""s</div>
     </body>
 </html>""" 
 def show_user(url):
