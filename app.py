@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 app = Flask(__name__)
-TEMPLATE =
+
 import json, io
 def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
     width="100%", height="500", **kwargs):
