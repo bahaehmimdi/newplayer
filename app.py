@@ -3,6 +3,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from flask import Flask, send_file
+from io import BytesIO
 app = Flask(__name__)
 
 import json, io
@@ -129,6 +131,18 @@ def testert():
 @app.route('/dash')
 def testerd():
  return pivot_ui(show_user(request.args.get('url', 'No URL provided')))
+
+@app.route('/download')
+def download():
+# return pivot_ui(show_user(request.args.get('url', 'No URL provided')))
+
+    output = BytesIO()
+    show_user(request.args.get('url', 'No URL provided')).to_excel(output, index=False)
+    output.seek(0)
+    
+    # Return the Excel file as a response
+    return send_file(output, as_attachment=True, download_name="data.xlsx", mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+
 # Export to Excel
 # df.to_excel("output3.xlsx", index=False)
 
