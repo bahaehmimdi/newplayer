@@ -69,11 +69,11 @@ def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
                             $.pivotUtilities.export_renderers
                             ),
                         hiddenAttributes: [""]
-                    }, """+str(kwargs)+"""s)
+                    }, """+str(kwargs)+""")
                 ).show();
              });
         </script>
-        <div id="output" style="display: none;">"""+str(csv)+"""s</div>
+        <div id="output" style="display: none;">"""+str(csv)+"""</div>
     </body>
 </html>""" 
 def show_user(url):
