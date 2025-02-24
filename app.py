@@ -107,7 +107,7 @@ def show_user(url):
        
          
         datas.append({
-"price":div.find_all(lambda tag: tag.has_attr('class') and any("priceBar" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),            
+"price":div.find_all(lambda tag: tag.has_attr('class') and any("priceTag" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),            
 "title":div.find_all(lambda tag: tag.has_attr('class') and any("listingTit" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),
 
 "location":div.find_all(lambda tag: tag.has_attr('class') and any("contactBar" in cls for cls in tag['class']))[0].text.replace("\t","").replace("\n",""),
