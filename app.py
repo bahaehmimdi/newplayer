@@ -4,7 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 app = Flask(__name__)
-TEMPLATE = u"""
+TEMPLATE =
+import json, io
+def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
+    width="100%", height="500", **kwargs):
+    with io.open(outfile_path, 'wt', encoding='utf8') as outfile:
+        csv = df.to_csv(encoding='utf8')
+
+    return  f"""
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,21 +69,14 @@ TEMPLATE = u"""
                             $.pivotUtilities.export_renderers
                             ),
                         hiddenAttributes: [""]
-                    }, %(kwargs)s)
+                    }, {kwargs}s)
                 ).show();
              });
         </script>
-        <div id="output" style="display: none;">%(csv)s</div>
+        <div id="output" style="display: none;">{csv}s</div>
     </body>
 </html>
-"""
-import json, io
-def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
-    width="100%", height="500", **kwargs):
-    with io.open(outfile_path, 'wt', encoding='utf8') as outfile:
-        csv = df.to_csv(encoding='utf8')
-
-    return TEMPLATE % dict(csv=csv, kwargs=json.dumps(kwargs))
+""" % dict(csv=csv, kwargs=json.dumps(kwargs))
 def show_user(url):
  #return  request.args.get('url', 'No URL provided')
  datas=[]
