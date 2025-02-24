@@ -83,7 +83,7 @@ def show_user(url):
  p=1
  stop= False
  while not stop:
-  url = request.args.get('url', 'No URL provided')+":p:"+str(p)#request.path.split("/dash/")[-1]#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"
+  url = url+":p:"+str(p)#request.path.split("/dash/")[-1]#"https://www.mubawab.ma/fr/sd/tanger/malabata/appartements-a-vendre"
 
 # Send a GET request to fetch the page content
   response = requests.get(url)
@@ -125,10 +125,10 @@ def show_user(url):
  return df
 @app.route('/table')
 def testert():
- return show_user(url).to_html(index=False)
+ return show_user(request.args.get('url', 'No URL provided')).to_html(index=False)
 @app.route('/dash')
 def testerd():
- return pivot_ui(show_user(url))
+ return pivot_ui(show_user(request.args.get('url', 'No URL provided')))
 # Export to Excel
 # df.to_excel("output3.xlsx", index=False)
 
