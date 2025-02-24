@@ -11,7 +11,7 @@ def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
     with io.open(outfile_path, 'wt', encoding='utf8') as outfile:
         csv = df.to_csv(encoding='utf8')
 
-    return  f"""
+    return  """
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,14 +69,13 @@ def pivot_ui(df, outfile_path = "pivottablejs.html", url="",
                             $.pivotUtilities.export_renderers
                             ),
                         hiddenAttributes: [""]
-                    }, {kwargs}s)
+                    }, """+str(kwargs)+"""s)
                 ).show();
              });
         </script>
-        <div id="output" style="display: none;">{csv}s</div>
+        <div id="output" style="display: none;">{"""+str(csv)+"""s</div>
     </body>
-</html>
-""" % dict(csv=csv, kwargs=json.dumps(kwargs))
+</html>""" 
 def show_user(url):
  #return  request.args.get('url', 'No URL provided')
  datas=[]
